@@ -1,0 +1,32 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # ---------- FRONTEND ----------
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: ./client
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./client
+
+      # ---------- BACKEND ----------
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: ./server
+
+      # You can also run backend tests or linting here
+
+      # Optional: Deploy frontend/backend if using CLI tools (e.g., Vercel CLI, SSH to EC2, etc.)
