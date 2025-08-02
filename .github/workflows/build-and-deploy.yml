@@ -9,11 +9,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./  # So paths are relative from root
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # ----- FRONTEND -----
       - name: Install frontend dependencies
         run: npm install
         working-directory: client
@@ -22,12 +25,6 @@ jobs:
         run: npm run build
         working-directory: client
 
-      # ----- BACKEND -----
       - name: Install backend dependencies
         run: npm install
         working-directory: server
-
-      # Optional: Run backend tests
-      # - name: Run backend tests
-      #   run: npm test
-      #   working-directory: server
